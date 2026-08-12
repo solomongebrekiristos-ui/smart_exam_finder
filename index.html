@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Exam Finder — GMBU STEM Center</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/jpeg" href="logo.png">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo-container">
+            <img src="logo.png" alt="GMBU Logo" class="university-logo" onerror="this.style.display='none'">
+    
+            <div class="logo-text">
+                <h2>Gambella University</h2>
+                <p>STEM Center — Computer Science Department</p>
+            </div>
+        </div>
+        <button class="developer-btn" id="openModalBtn">
+            <i class="fa-solid fa-user-code"></i> Developer Info
+        </button>
+    </header>
+<!-- hero-section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1><i class="fa-solid fa-magnifying-glass-location"></i> Smart Exam Finder</h1>
+            <p>Locate your examination building, room, and seat assignment instantly.</p>
+
+            <div class="search-box">
+                <i class="fa-solid fa-search search-icon"></i>
+                <input type="text" id="searchInput" placeholder="Search by Student Name or ID (e.g., 1001 or Solomon)..." autocomplete="off">
+                <button id="clearBtn" class="clear-btn" title="Clear Search"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div class="filter-tabs">
+                <button class="tab-btn active" data-stream="all">All Students</button>
+                <button class="tab-btn" data-stream="natural">Natural Science</button>
+                <button class="tab-btn" data-stream="social">Social Science</button>
+            </div>
+        </div>
+    </section>
+<!-- main body -->
+    <main class="container">
+        <div class="stats-bar">
+            <div class="stat-badge">
+                <i class="fa-solid fa-users"></i>
+                <span>Total Students Loaded: <strong id="totalCount">0</strong></span>
+            </div>
+            <div class="stat-badge info-badge">
+                <i class="fa-solid fa-bolt"></i>
+                <span id="searchStatus">Connecting to system...</span>
+            </div>
+        </div>
+
+        <div id="resultsGrid" class="cards-grid">
+            <div class="loading-spinner" id="loadingSpinner">
+                <i class="fa-solid fa-circle-notch fa-spin"></i>
+                <p>Loading exam database from Google Sheets...</p>
+            </div>
+        </div>
+    </main>
+<!-- modal-overlay -->
+    <div class="modal-overlay" id="devModal">
+        <div class="modal-card">
+            <button class="close-modal" id="closeModalBtn">&times;</button>
+            <div class="modal-header">
+                <i class="fa-solid fa-laptop-code dev-avatar"></i>
+                <h3>Solomon Gebrekiristos Wube</h3>
+                <p class="role-title">Programmer & CS Student</p>
+            </div>
+            <div class="modal-body">
+                <div class="info-row">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <span>GMBU STEM Center</span>
+                </div>
+                <div class="info-row">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>0968786037</span>
+                </div>
+                <div class="info-row">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>Solomongebrekiristos@gmail.com</span>
+                </div>
+                <div class="info-row">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>Gambella, Ethiopia</span>
+                </div>
+
+                <div class="qr-container">
+                    <p>Scan to Save Contact Details:</p>
+                    <img id="qrCodeImg" src="developer-qr.jpg" alt="Developer Contact QR Code">
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- footer section -->
+    <footer class="footer">
+        <p>This system was researched, designed, and developed by <strong>Solomon Gebrekiristos Wube</strong> as a Computer Science programming project for Gambella University (GMBU) STEM Center.</p>
+    </footer>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js')
+            .then((registration) => {
+              console.log('Service Worker registered successfully:', registration.scope);
+            })
+            .catch((error) => {
+              console.log('Service Worker registration failed:', error);
+            });
+        });
+      }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
